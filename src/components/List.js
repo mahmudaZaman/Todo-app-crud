@@ -11,6 +11,10 @@ class List extends Component {
   render() {
     return (
       <div className="padding-v-10">
+        <div className="padding-v-10">
+          <input type="text" value={this.props.text}/>
+          <a className="waves-effect waves-light btn">Add Todo</a>
+        </div>
         <table className="striped centered">
           <thead>
             <tr>
