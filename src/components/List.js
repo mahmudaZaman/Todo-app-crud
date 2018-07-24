@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import * as appActions from "../Actions/actions";
+import { Link } from 'react-router-dom';
+import * as appActions from "../actions";
 
 class List extends Component {
 
   componentDidMount = () => {
     this.props.fetchData();
   }
-
   render() {
     return (
       <div className="padding-v-10">
         <div className="padding-v-10">
-          <input type="text" value={this.props.text}/>
-          <a className="waves-effect waves-light btn">Add Todo</a>
+          {/* <a className="waves-effect waves-light btn">
+            <Link to='/addTodo'>Add Todo</Link>
+          </a>  */}
+          <Link to='/addTodo'>Add Todo</Link>
         </div>
         <table className="striped centered">
           <thead>
@@ -23,17 +25,19 @@ class List extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.todos.map((todo) => {
+            {this.props.todos.map((todo, index) => {
               return (
-                <tr key={todo.id}>
-                  <td className="padding-v-10">{todo.name}</td>
+                <tr key={index}>
+                  <td className="padding-v-10">{todo.description}</td>
                   <td className="padding-v-10">
-                    <a className="waves-effect waves-light btn margin-right-10">Edit</a>
+                    <Link className="waves-effect waves-light btn margin-right-10" to={`/edit/${todo.id}`}>Edit</Link>
+                    {/* <a className="waves-effect waves-light btn margin-right-10">Edit</a> */}
                     <a className="waves-effect waves-light btn red">Delete</a>
                   </td>
                 </tr>
               )
             })}
+
           </tbody>
         </table>
       </div>
