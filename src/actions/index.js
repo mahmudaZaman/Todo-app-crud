@@ -7,16 +7,19 @@ export const DELETE_TODO_SUCCESS = "DELETE_TODO_SUCCESS"
 export const ITEM_FETCHING_IN_PROGRESS_INFO = "ITEM_FETCHING_IN_PROGRESS_INFO"
 
 export const fetchTodo = (json) => {
-    console.log('json', json._embedded.todo);
+    console.log('json', json._embedded.todo,json.page);
     return {
       type: FETCH_TODO,
-      payload: json._embedded.todo
+      payload: {
+        todos : json._embedded.todo,
+        pageInfo : json.page
+      }
     };
   }
   
-  export const fetchData = () => {
+  export const fetchData = (currentPageNumber,pageSize) => {
     return (dispatch) => {
-      fetch('http://crud0509.herokuapp.com/todo').then(data =>
+      fetch(`http://crud0509.herokuapp.com/todo?page=${currentPageNumber}&size=${pageSize}`).then(data =>
         data.json().then(json => {
           dispatch(fetchTodo(json));
         })

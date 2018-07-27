@@ -14,7 +14,16 @@ const initialState = {
   text: "",
   todos: [],
   description: '',
-  fetchingSingleItem : false
+  fetchingSingleItem : false,
+  currentPageNumber : 0,
+  pageSize: 3,
+  totalElements : 0,
+  totalPages :[],
+}
+const convertToArray = (n)=>{
+  let result = [];
+  for(let i=0;i<n;i++)result.push(i);
+  return result;
 }
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -34,8 +43,12 @@ const rootReducer = (state = initialState, action) => {
     case appActions.FETCH_TODO: {
       return {
         ...state,
-        todos: action.payload,
-        todoLoaded : true
+        todos: action.payload.todos,
+        todoLoaded : true,
+        currentPageNumber : action.payload.pageInfo.number,
+        totalElements : action.payload.pageInfo.totalElements,
+        pageSize : action.payload.pageInfo.size,
+        totalPages : convertToArray(action.payload.pageInfo.totalPages),
       };
     }
     case appActions.CHANGE_DESCRIPTION_TEXT: {
