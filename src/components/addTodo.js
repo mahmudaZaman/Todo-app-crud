@@ -16,6 +16,7 @@ class AddTodo extends Component {
         description = {this.props.description}
         changeDescriptionTextHandler = {this.changeDescriptionTextHandler}
         addTodoHandler = {this.addTodoHandler}
+        buttonText = "Add"
         ></TodoForm>
     );
   }

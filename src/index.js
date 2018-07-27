@@ -13,10 +13,24 @@ const initialState = {
   todoLoaded : false,
   text: "",
   todos: [],
-  description: ''
+  description: '',
+  fetchingSingleItem : false
 }
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case appActions.ITEM_FETCHING_IN_PROGRESS_INFO : {
+      return {
+        ...state,
+        fetchingSingleItem : action.payload.value
+      };
+    }
+    case appActions.FETCH_TODO_BY_ID_SUCCESS : {
+      return {
+        ...state,
+        fetchingSingleItem : false,
+        description : action.payload.description
+      };
+    }
     case appActions.FETCH_TODO: {
       return {
         ...state,
@@ -34,6 +48,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         description: ''
+      }
+    }
+    case appActions.DELETE_TODO_SUCCESS:{
+      return {
+        ...state,
+        todos : state.todos.filter((todo) => todo.id !== action.payload.id )
       }
     }
   }

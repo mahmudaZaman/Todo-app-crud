@@ -8,14 +8,14 @@ class List extends Component {
   componentDidMount = () => {
     this.props.fetchData();
   }
+  deleteTodoHandler = (id) => {
+    this.props.deleteTodoHandler(id);
+  }
   render() {
     return (
       <div className="padding-v-10">
         <div className="padding-v-10">
-          {/* <a className="waves-effect waves-light btn">
-            <Link to='/addTodo'>Add Todo</Link>
-          </a>  */}
-          <Link to='/addTodo'>Add Todo</Link>
+          <Link className="waves-effect waves-light btn" to='/addTodo'>Add Todo</Link>
         </div>
         <table className="striped centered">
           <thead>
@@ -31,13 +31,11 @@ class List extends Component {
                   <td className="padding-v-10">{todo.description}</td>
                   <td className="padding-v-10">
                     <Link className="waves-effect waves-light btn margin-right-10" to={`/edit/${todo.id}`}>Edit</Link>
-                    {/* <a className="waves-effect waves-light btn margin-right-10">Edit</a> */}
-                    <a className="waves-effect waves-light btn red">Delete</a>
+                    <a className="waves-effect waves-light btn red" onClick={() => this.deleteTodoHandler(todo.id)}>Delete</a>
                   </td>
                 </tr>
               )
             })}
-
           </tbody>
         </table>
       </div>
@@ -53,7 +51,8 @@ const mapStateToProps = (state, props) => {
 }
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchData: () => dispatch(appActions.fetchData())
+    fetchData: () => dispatch(appActions.fetchData()),
+    deleteTodoHandler: (id) => dispatch(appActions.deleteTodoHandler(id)) 
   }
 }
 
