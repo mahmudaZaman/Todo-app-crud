@@ -22,7 +22,6 @@ class List extends Component {
     // console.log("this.props.totalPages",this.props.totalPages)
     return (
       <div className="padding-v-10">
-      
         <div>
           SearchFilters
           <div>Current Page = {this.props.currentPageNumber+1}</div>
@@ -62,7 +61,6 @@ class List extends Component {
             })}
           </tbody>
         </table>
-
       </div>
     );
   }
