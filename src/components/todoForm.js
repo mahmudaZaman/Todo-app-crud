@@ -1,6 +1,4 @@
 import React, { PureComponent } from 'react';
-import { connect } from "react-redux";
-import * as appActions from "../actions";
 
 class TodoForm extends PureComponent {
   componentWillReceiveProps(nextState,nextProps){
